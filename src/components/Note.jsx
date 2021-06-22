@@ -61,10 +61,10 @@ function Note() {
                             <div>
                                 <h2>{note.title}</h2>
                                 <p>{note.text}</p>
-                                <p className="owner">
+                                {/* <p className="owner">
                                     Автор: <br />
                                     {note.ownerEmail}
-                                </p>
+                                </p> */}
                             </div>
                         </Link>
                     </div>

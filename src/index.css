@@ -14,6 +14,9 @@ body {
     font-size: 1.2rem;
     overflow-x: hidden;
 }
+a {
+    color: var(--yellow);
+}
 button {
     border: none;
     padding: 0.5rem;
@@ -36,6 +39,21 @@ textarea {
 textarea {
     min-height: 200px;
 }
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex-grow: 1;
+}
+footer {
+    text-align: center;
+    background-color: var(--purple);
+    padding: 0.1rem;
+    color: var(--yellow);
+}
+
 .link-button {
     border-radius: 0.1rem;
     border: none;
@@ -61,7 +79,9 @@ textarea {
 .notes {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 auto;
     padding: 2rem;
+    width: 100%;
 }
 .notes a {
     text-decoration: none;
