@@ -2,11 +2,13 @@ import React, { useState, useContext } from 'react';
 import firebase from '../../config/firebase';
 import { Redirect } from 'react-router-dom';
 import { AuthContext } from './Auth';
+import { useHistory } from 'react-router';
 const Login = () => {
     const { currentUser } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [error, setError] = useState('');
+    const history = useHistory();
     const register = () => {
         firebase
             .auth()
@@ -25,11 +27,12 @@ const Login = () => {
             .signInWithEmailAndPassword(email, password)
             .then(() => {
                 resetInput();
+                history.push('/');
             })
             .catch((err) => {
                 console.error(err);
+                setError(err.code);
             });
-        <Redirect to="/" />;
     };
 
     const resetInput = () => {
@@ -53,6 +56,8 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="password"
                 />
+                {error ? <span className="error">{error}</span> : null}
+
                 <button onClick={register}>Register</button>
                 <button onClick={login}>Login</button>
             </div>

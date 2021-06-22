@@ -1,10 +1,11 @@
-import React, { useState, useEffect, Fragment, useContext } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
 import firebase from '../config/firebase';
 import { AuthContext } from './auth/Auth';
 import { useHistory } from 'react-router';
 import { Redirect, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import ReactMarkdown from 'react-markdown';
+import Loader from './Loader';
 
 function Note() {
     const { currentUser } = useContext(AuthContext);
@@ -38,12 +39,18 @@ function Note() {
     }
 
     if (!currentUser) return <Redirect to="/login" />;
+    if (loading) {
+        return <Loader />;
+    }
     return (
         <Fragment>
-            {loading ? <h1>Loading...</h1> : null}
             <section className="notes-edit">
                 <Link to="/">
-                    <button onClick={() => addNote()}>👈</button>
+                    <button onClick={() => addNote()}>
+                        <span role="img" aria-label="Leftwards Hand">
+                            👈
+                        </span>
+                    </button>
                 </Link>
                 <div className="inputBox ">
                     <input

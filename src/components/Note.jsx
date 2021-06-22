@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment, useContext } from 'react';
 import firebase from '../config/firebase';
 import { AuthContext } from './auth/Auth';
 import { Redirect, Link } from 'react-router-dom';
+import Loader from './Loader';
 
 function Note() {
     const { currentUser } = useContext(AuthContext);
@@ -38,17 +39,25 @@ function Note() {
     }
 
     if (!currentUser) return <Redirect to="/login" />;
+    if (loading) {
+        return <Loader />;
+    }
     return (
         <Fragment>
-            {loading ? <h1>Loading...</h1> : null}
             <section className="notes">
                 <Link to="/new" className="note new-note">
-                    ✍️
+                    <span role="img" aria-label="Writing Hand">
+                        ✍️
+                    </span>
                 </Link>
                 {notes.map((note) => (
-                    <div className="note">
-                        <button onClick={() => deleteNote(note)}>❌</button>
-                        <Link to={'notes/' + note.id} key={note.id}>
+                    <div className="note" key={note.id}>
+                        <button onClick={() => deleteNote(note)}>
+                            <span role="img" aria-label="Cross Mark">
+                                ❌
+                            </span>
+                        </button>
+                        <Link to={'notes/' + note.id}>
                             <div>
                                 <h2>{note.title}</h2>
                                 <p>{note.text}</p>

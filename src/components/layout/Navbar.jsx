@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import firebase from '../../config/firebase';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../auth/Auth';
 
 const Navbar = () => {
